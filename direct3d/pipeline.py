@@ -45,10 +45,16 @@ class Direct3dPipeline(object):
             model_path = hf_hub_download(repo_id=pipeline_path, filename="model.ckpt", repo_type="model")
         
         cfg = OmegaConf.load(config_path)
-        state_dict = torch.load(model_path, map_location='cpu')
+        state_dict = torch.load(model_path, map_location='cuda' if torch.cuda.is_available() else 'cpu')
 
         vae = instantiate_from_config(cfg.vae)
         vae.load_state_dict(state_dict["vae"], strict=True)
+        #check if vae checkpoints were loaded
+        if "vae" in state_dict:
+            print("VAE weights loaded successfully")
+        else:
+            print("VAE weights not found in the checkpoint")
+        
         dit = instantiate_from_config(cfg.dit)
         dit.load_state_dict(state_dict["dit"], strict=True)
 

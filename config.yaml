@@ -1,0 +1,12 @@
+vae:
+  target: direct3d.models.vae.D3D_VAE
+  params:
+    triplane_res: 32
+    triplane_dim: 32
+    latent_dim: 16
+    num_freqs: 8
+    num_attention_heads: 12
+    attention_head_dim: 64
+    num_encoder_layers: 8
+    num_geodecoder_layers: 5
+    latents_scale: 2.45

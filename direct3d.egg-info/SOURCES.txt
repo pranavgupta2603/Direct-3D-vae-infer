@@ -1,0 +1,8 @@
+LICENSE
+README.md
+setup.py
+direct3d.egg-info/PKG-INFO
+direct3d.egg-info/SOURCES.txt
+direct3d.egg-info/dependency_links.txt
+direct3d.egg-info/requires.txt
+direct3d.egg-info/top_level.txt

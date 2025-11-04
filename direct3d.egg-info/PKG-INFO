@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: direct3d
+Version: 1.0.0
+Summary: Direct3D: Scalable Image-to-3D Generation via 3D Latent Diffusion Transformer
+Requires-Python: >=3.10
+License-File: LICENSE
+Requires-Dist: torch
+Requires-Dist: numpy
+Requires-Dist: cython
+Requires-Dist: trimesh
+Requires-Dist: diffusers
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
