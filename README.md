@@ -3,6 +3,7 @@
 
 > "For the latest updates and source code, check out the [official Direct3D GitHub repository](https://github.com/DreamTechAI/Direct3D)."
 
+I used CUDA 12.1.1
 
 ## 🚀 Getting Started
 
@@ -13,25 +14,9 @@ git clone https://github.com/DreamTechAI/Direct3D.git
 
 cd Direct3D
 
-pip install -r requirements.txt
+uv sync
 
-pip install -e .
-```
-
-### Usage
-
-```python
-from direct3d.pipeline import Direct3dPipeline
-pipeline = Direct3dPipeline.from_pretrained("DreamTechAI/Direct3D")
-pipeline.to("cuda")
-mesh = pipeline(
-    "assets/devil.png",
-    remove_background=False, # set to True if the background of the image needs to be removed
-    mc_threshold=-1.0,
-    guidance_scale=4.0,
-    num_inference_steps=50,
-)["meshes"][0]
-mesh.export("output.obj")
+uv shell
 ```
 
 ### VAE Inference for Mesh Reconstruction
@@ -41,7 +26,7 @@ You can use the Direct3D VAE directly for 3D mesh encoding and reconstruction wi
 #### Single Mesh Reconstruction
 
 ```bash
-python obj_vae_infer.py \
+uv run obj_vae_infer.py \
     --input path/to/your/mesh.obj \
     --num-points 81920 \
     --mc-threshold -2.0 \
@@ -62,7 +47,7 @@ The script will:
 3. Decode back to a mesh using marching cubes
 4. Save the reconstructed mesh to `./test_output/`
 
-#### Batch Processing Multiple Meshes
+#### Processing Multiple Meshes
 
 Use the provided `working.sh` script to process all OBJ files in a directory:
 
@@ -75,18 +60,7 @@ This will process all `.obj` files in the `./test_meshes/` directory and save re
 
 **Note:** Make sure you have the `config.yaml` file in the root directory, which defines the VAE architecture configuration.
 
-## 🤗 Acknowledgements
-
-Thanks to the following repos for their great work, which helps us a lot in the development of Direct3D:
-
-- [3DShape2VecSet](https://github.com/1zb/3DShape2VecSet/tree/master)
-- [Michelangelo](https://github.com/NeuralCarver/Michelangelo)
-- [Objaverse](https://objaverse.allenai.org/)
-- [diffusers](https://github.com/huggingface/diffusers)
-
 ## 📖 Citation
-
-If you find our work useful, please consider citing our paper:
 
 ```bibtex
 @article{direct3d,
