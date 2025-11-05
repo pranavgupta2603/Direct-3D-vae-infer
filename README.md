@@ -62,6 +62,47 @@ mesh = pipeline(
 mesh.export("output.obj")
 ```
 
+### VAE Inference for Mesh Reconstruction
+
+You can use the Direct3D VAE directly for 3D mesh encoding and reconstruction without the diffusion model. This is useful for mesh compression, reconstruction, and understanding the VAE's encoding capabilities.
+
+#### Single Mesh Reconstruction
+
+```bash
+python obj_vae_infer.py \
+    --input path/to/your/mesh.obj \
+    --num-points 81920 \
+    --mc-threshold -2.0 \
+    --voxel-resolution 512
+```
+
+**Arguments:**
+- `--input`: Path to the input OBJ file (required)
+- `--model-id`: HuggingFace repo or local path (default: "DreamTechAI/Direct3D")
+- `--device`: Device to run on (default: cuda if available, else cpu)
+- `--num-points`: Number of surface points to sample from input mesh (default: 81920)
+- `--voxel-resolution`: Marching cubes grid resolution (default: 512)
+- `--mc-threshold`: Iso-surface threshold for marching cubes (default: 0.0)
+
+The script will:
+1. Load and sample points with normals from your input mesh
+2. Encode the point cloud through the VAE
+3. Decode back to a mesh using marching cubes
+4. Save the reconstructed mesh to `./test_output/`
+
+#### Batch Processing Multiple Meshes
+
+Use the provided `working.sh` script to process all OBJ files in a directory:
+
+```bash
+# Place your meshes in ./test_meshes/
+bash working.sh
+```
+
+This will process all `.obj` files in the `./test_meshes/` directory and save reconstructions to `./test_output/`.
+
+**Note:** Make sure you have the `config.yaml` file in the root directory, which defines the VAE architecture configuration.
+
 ## 🤗 Acknowledgements
 
 Thanks to the following repos for their great work, which helps us a lot in the development of Direct3D:
