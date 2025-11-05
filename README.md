@@ -10,9 +10,9 @@ I used CUDA 12.1.1
 ### Installation
 
 ```sh
-git clone https://github.com/DreamTechAI/Direct3D.git
+git clone https://github.com/pranavgupta2603/Direct-3D-vae-infer.git
 
-cd Direct3D
+cd Direct-3D-vae-infer
 
 uv sync
 
